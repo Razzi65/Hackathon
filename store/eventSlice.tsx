@@ -28,10 +28,11 @@ export const eventSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(sendEventsToFirebase.fulfilled, (state, action) => {
             console.log(action.payload);
-
+            let newAllData = [...state.allData, action.payload]
             let newstate: any = {
                 ...state,
-                eventsData: action.payload
+                eventsData: action.payload,
+                allData:newAllData 
             }
 
             return newstate
