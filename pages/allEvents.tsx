@@ -8,6 +8,10 @@ const AllEvents = () => {
   const [allEvents, setAllEvents] = useState([]);
   const selector = useSelector((store) => store.eventSlice.allData);
 
+  useEffect(() => {
+    setAllEvents(selector);
+  }, [selector]);
+
   const onclickHandler = async () => {
     let events = [];
     const querySnapshot = await getDocs(collection(db, "events"));
@@ -22,6 +26,8 @@ const AllEvents = () => {
       });
     });
     setAllEvents(events);
+    console.log(selector);
+    
   };
 
   useEffect(() => {
