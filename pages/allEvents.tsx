@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useEffect, useState } from "react";
+import EventType from "@/Types/eventType";
 
 const AllEvents = () => {
   const [allEvents, setAllEvents] = useState([]);
-  const selector = useSelector((store) => store.eventSlice.allData);
+  const selector = useSelector((store) => store.eventSlice.allData) as EventType[];
 
   useEffect(() => {
     setAllEvents(selector);
@@ -25,8 +26,10 @@ const AllEvents = () => {
         description: doc.data().edescription,
       });
     });
+    console.log("eventssss", events);
+    
     setAllEvents(events);
-    console.log(selector);
+    console.log("selector>>",selector);
     
   };
 
